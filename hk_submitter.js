@@ -7,10 +7,10 @@ const puppeteer = require("puppeteer");
 const credObj = require("./cred");
 const fs = require("fs");
 
-// let inputArr=process.argv.slice(2);
-// let topic=inputArr[0];
-// let qName=inputArr[1];
-// let codeFileName=inputArr[2];
+let inputArr=process.argv.slice(2);
+let topic=inputArr[0];
+let qName=inputArr[1];
+let codeFileName=inputArr[2];
 
 
 (async ()=> {
@@ -27,14 +27,14 @@ const fs = require("fs");
     await loginToHK(tab);
     //    promises compose 
     // choose the topic from the given user topic input 
-    await waitAndClickTopic("Java", tab);
+    await waitAndClickTopic(topic, tab);
 
     // select question from the pool of question according to user input
-    await waitAndClickQuestion("Java Stdin and Stdout I", tab)
+    await waitAndClickQuestion(qName, tab)
     // write the code ->  -> code read type 
     // code -> input 
     // read -> pupptee pass
-    let code = await fs.promises.readFile("code.java", "utf-8");
+    let code = await fs.promises.readFile(codeFileName, "utf-8");
     // console.log(code);
     await copyPasteQuestion(code, tab);
     // // submit the code 
